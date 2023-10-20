@@ -37,6 +37,8 @@ $mb = array(
 'mb_8' => null,
 'mb_9' => null,
 'mb_10' => null,
+'mb_sdate' => null,
+'mb_fdate' => null,
 );
 
 $sound_only = '';
@@ -90,7 +92,10 @@ else if ($w == 'u')
     $mb['mb_8'] = get_text($mb['mb_8']);
     $mb['mb_9'] = get_text($mb['mb_9']);
     $mb['mb_10'] = get_text($mb['mb_10']);
+    $mb['mb_sdate'] = get_text($mb['mb_sdate']);
+    $mb['mb_fdate'] = get_text($mb['mb_fdate']);
 }
+
 else
     alert('제대로 된 값이 넘어오지 않았습니다.');
 
@@ -186,6 +191,7 @@ add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js
 <input type="hidden" name="sod" value="<?php echo $sod ?>">
 <input type="hidden" name="page" value="<?php echo $page ?>">
 <input type="hidden" name="token" value="">
+<input type="hidden" name="mb_homepage" value="notuse">
 
 <div class="tbl_frm01 tbl_wrap">
     <table>
@@ -216,7 +222,10 @@ add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js
     </tr>
     <tr>
         <th scope="row"><label for="mb_level">회원 권한</label></th>
-        <td><?php echo get_member_level_select('mb_level', 1, $member['mb_level'], $mb['mb_level']) ?></td>
+        <td>
+            <?php echo help('교정 중인 경우 권한 6, 교정 마무리 후 권한 5로 변경') ?>
+            <?php echo get_member_level_select('mb_level', 1, $member['mb_level'], $mb['mb_level']) ?>
+        </td>
         <th scope="row">포인트</th>
         <td><a href="./point_list.php?sfl=mb_id&amp;stx=<?php echo $mb['mb_id'] ?>" target="_blank"><?php echo number_format($mb['mb_point']) ?></a> 점</td>
     </tr>
