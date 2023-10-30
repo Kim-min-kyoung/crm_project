@@ -78,12 +78,12 @@ $colspan = 16;
 
 <label for="sfl" class="sound_only">검색대상</label>
 <select name="sfl" id="sfl">
-    <option value="mb_id"<?php echo get_selected($sfl, "mb_id"); ?>>회원아이디</option>
+    <option value="mb_id"<?php echo get_selected($sfl, "mb_id"); ?>>회원아이디(차트번호)</option>
     <option value="mb_nick"<?php echo get_selected($sfl, "mb_nick"); ?>>닉네임</option>
     <option value="mb_name"<?php echo get_selected($sfl, "mb_name"); ?>>이름</option>
     <option value="mb_level"<?php echo get_selected($sfl, "mb_level"); ?>>권한</option>
     <option value="mb_email"<?php echo get_selected($sfl, "mb_email"); ?>>E-MAIL</option>
-    <option value="mb_tel"<?php echo get_selected($sfl, "mb_tel"); ?>>전화번호</option>
+    <option value="mb_tel"<?php echo get_selected($sfl, "mb_tel"); ?>>보호자휴대폰</option>
     <option value="mb_hp"<?php echo get_selected($sfl, "mb_hp"); ?>>휴대폰번호</option>
     <option value="mb_point"<?php echo get_selected($sfl, "mb_point"); ?>>포인트</option>
     <option value="mb_datetime"<?php echo get_selected($sfl, "mb_datetime"); ?>>가입일시</option>
@@ -120,7 +120,7 @@ $colspan = 16;
             <label for="chkall" class="sound_only">회원 전체</label>
             <input type="checkbox" name="chkall" value="1" id="chkall" onclick="check_all(this.form)">
         </th>
-        <th scope="col" id="mb_list_id" colspan="2"><?php echo subject_sort_link('mb_id') ?>아이디</a></th>
+        <th scope="col" id="mb_list_id" colspan="2"><?php echo subject_sort_link('mb_id') ?>회원아이디(차트번호)</a></th>
         <th scope="col" rowspan="2" id="mb_list_cert"><?php echo subject_sort_link('mb_certify', '', 'desc') ?>본인확인</a></th>
         <th scope="col" id="mb_list_mailc"><?php echo subject_sort_link('mb_email_certify', '', 'desc') ?>메일인증</a></th>
         <th scope="col" id="mb_list_open"><?php echo subject_sort_link('mb_open', '', 'desc') ?>정보공개</a></th>
