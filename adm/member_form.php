@@ -332,19 +332,23 @@ add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js
         </td>
     </tr>
     <tr>
-        <th scope="row"><label for="mb_memo">메모</label></th>
-        <td colspan="3"><textarea name="mb_memo" id="mb_memo"><?php echo $mb['mb_memo'] ?></textarea></td>
+        <th scope="row"><label for="mb_sdate">치료시작일</label></th>
+        <td colspan="3">
+            <input class="required frm_input" type="date" name="mb_sdate" id="mb_sdate" value="<?=$mb['mb_sdate'];?>" pattern="\d{4}-\d{2}-\d{2}">
+            <span class="example_txt">ex&#41;연도-월-일</span>
+        </td>
     </tr>
-
-    <?php if ($w == 'u') { ?>
     <tr>
-        <th scope="row">치료시작일</th>
-        <td><?php echo $mb['mb_sdate'] ?></td>
-        <th scope="row">치료종료예상일</th>
-        <td><?php echo $mb['mb_fdate'] ?></td>
+        <th scope="row"><label for="mb_fdate">치료종료예상일</label></th>
+        <td colspan="3">
+            <input class="required frm_input" type="date" name="mb_fdate" id="mb_fdate" value="<?=$mb['mb_fdate'];?>" pattern="\d{4}-\d{2}-\d{2}">
+            <span class="example_txt">ex&#41;연도-월-일</span>
+        </td>
     </tr>
-    <?php } ?>
-
+    <tr>
+        <th scope="row"><label for="mb_memo">추가 기입 사항</label></th>
+        <td colspan="3"><textarea name="mb_memo" id="mb_memo"><?php echo $mb['mb_memo']; ?></textarea></td>
+    </tr>
     <?php if ($config['cf_use_recommend']) { // 추천인 사용 -> 소개 환자 시 사용! 차트번호 기입으로 체크 ?>
     <tr>
         <th scope="row">추천인</th>
@@ -356,10 +360,6 @@ add_javascript(G5_POSTCODE_JS, 0);    //다음 주소 js
 
     run_event('admin_member_form_add', $mb, $w, 'table');
     ?>
-    <tr>
-        <th scope="row">치료 시작일</th>
-		<td><input type="date" name="mb_10" value="<?php echo $mb['mb_10'] ?>" id="mb_1" class="frm_input" size="30" maxlength="255"></td>
-    </tr>
 
     <?php for ($i=1; $i<=4; $i++) { ?> <!-- 두번째 $i 10까지 가능 -->
     <tr>
