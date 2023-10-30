@@ -5,7 +5,6 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0);
 
 
-
 // 22.01.18  올소스토리  6등급 회원 조회 
 $wr_set= array();
 $sql1="select mb_id, mb_name from {$g5['member_table']} where mb_level=6 order by mb_id desc";
@@ -133,8 +132,6 @@ $attrs=NULL ) {
 
 <!-- 회원선택 -->
     <div class="bo_w_select write_div">
-        <!--<label for="wr_1" class="sound_only">분류<strong>필수</strong></label>-->
-
 
     <? // 검색된 회원 정보 가져오기
     $sql1="select * from {$g5['member_table']} where mb_level=6 and mb_id = '$stx' order by mb_name ";
@@ -144,48 +141,54 @@ $attrs=NULL ) {
 
     <?php if($stx){?>
 
-
-    <? // 치료시작일
-    $date1 = substr($row['mb_10'],0,10); //날짜표시형식변경
-    $date = explode("-", $date1);
-    $year = $date[0];
-    $month = $date[1];
-    $day = $date[2];
-    $latest_date = substr($year,2,4)."".$month."".$day;
-    ?>
-    <? //치료종료일
-    $d_day2 = floor((strtotime($row[mb_1]) -
-      strtotime(date('Y-m-d'))) / 86400);
-    if ($d_day2 < 0) {
-      $d_day2 = '<div class="event_btn event_end">치료종료</div>';
+    <? //D-day 계산 (오늘날짜 기준)
+    $d_start = date("Y-m-d", time());;
+    $d_day_count = floor((strtotime(date($row['mb_fdate'])) -  strtotime($d_start)) / 86400 );
+    if ($d_day_count < 0) {
+    $d_day_count = '<span class="event_btn event_end dm fw700">치료종료</span>';
     } else {
-      $d_day2 = '<div class="event_btn event_ongoing">D-' . $d_day2 . '</div>';
+    $d_day_count = '<span class="event_btn event_ongoing dm fw700">D-' . $d_day_count . '</span>';
     }
     ?>
+
     <? // 만나이 계산
-    $birth_time   = strtotime($row['mb_9']);
+    $birth_time   = strtotime($row['mb_1']);
     $now          = date('Y');
     $birthday     = date('Y' , $birth_time);
     $age           = $now - $birthday - 1  ;
     ?>
 
     <br><br>
-    <?if(!$is_admin && $member[mb_level] <=8){?>
+
+    <?if(!$is_admin && $member['mb_level'] <=8){?>
     <div class="ortho_info_wrap">
         <div class="ortho_pf">
-            <p class="g8"><?= $row[mb_name]?></p>
+            <p class="g8">
+                <?    
+                    $mb_prof_dir = substr($row['mb_id'],0,2);
+                    $mb_prof_file = G5_DATA_PATH.'/member/'.$mb_prof_dir.'/'.get_mb_icon_name($row['mb_id']).'.gif';
+
+                    if (file_exists($mb_prof_file)) 
+                        echo get_member_profile_img($row['mb_id']);
+                ?>
+                <span><?= $row['mb_name']?></span>
+            </p>
         </div>
         <div class="ortho_info">
-            <div class="ortho_info2">
-                <span class="dm fw700"><?php echo $latest_date ?></span>
+            <div class="ortho_info1">
+                <span class="dm fw700"><?php echo $row['mb_sdate'] ?></span>
                 <p>치료 시작일</p>
+            </div>
+            <div class="ortho_info2">
+                <span class="dm fw700"><?php echo $row['mb_fdate'] ?></span>
+                <p>치료 종료 예상일</p>
             </div>
             <div class="ortho_info3">
                 <span class="dm fw700"><?php echo number_format($total_count) ?></span>
                 <p>스토리</p>
             </div>
             <div class="ortho_info4">
-                <span class="dm fw700"><?= $d_day2 ?></span>
+                <span class="dm fw700"><?= $d_day_count ?></span>
                 <p>남은 기간</p>
             </div>
         </div>
@@ -194,36 +197,49 @@ $attrs=NULL ) {
     <div class="customer_info_wrap">
         <div class="customer_info1">
             <p class="fw700">CASE</p>
-            <p><?= $row[mb_2]?></p>
+            <p><?= $row['mb_2']?></p>
         </div>
         <div class="customer_info2">
             <p class="fw700">치료형태</p>
-             <p><?= $row[mb_7]?>, <?= $row[mb_3]?>, <?= $row[mb_5]?>, <?= $row[mb_6]?></p>
+             <p><?= $row['mb_3']?></p>
         </div>
         <div class="customer_info3">
             <p class="fw700">사용장치</p>
-            <p><?= $row[mb_4]?></p>
+            <p><?= $row['mb_7']?></p>
         </div>
     </div>
    <?}?>
 
    <br><br>
-   <?if($is_admin || $member[mb_level] >=9 ){?>
+   <?if($is_admin || $member['mb_level'] >=9 ){?>
     <div class="ortho_info_wrap">
         <div class="ortho_pf">
-            <p class="g8"><?= $row[mb_name]?></p>
+            <p class="g8">
+                <?    
+                    $mb_prof_dir = substr($row['mb_id'],0,2);
+                    $mb_prof_file = G5_DATA_PATH.'/member/'.$mb_prof_dir.'/'.get_mb_icon_name($row['mb_id']).'.gif';
+
+                    if (file_exists($mb_prof_file)) 
+                        echo get_member_profile_img($row['mb_id']);
+                ?>
+                <span><?= $row['mb_name']?></span>
+            </p>
         </div>
         <div class="ortho_info">
-            <div class="ortho_info2">
-                <span class="dm fw700"><?php echo $latest_date ?></span>
+            <div class="ortho_info1">
+                <span class="dm fw700"><?php echo $row['mb_sdate'] ?></span>
                 <p>치료 시작일</p>
+            </div>
+            <div class="ortho_info2">
+                <span class="dm fw700"><?php echo $row['mb_fdate'] ?></span>
+                <p>치료 종료 예상일</p>
             </div>
             <div class="ortho_info3">
                 <span class="dm fw700"><?php echo number_format($total_count) ?></span>
                 <p>스토리</p>
             </div>
             <div class="ortho_info4">
-                <span class="dm fw700"><?= $d_day2 ?></span>
+                <span class="dm fw700"><?= $d_day_count ?></span>
                 <p>남은 기간</p>
             </div>
         </div>
@@ -233,43 +249,38 @@ $attrs=NULL ) {
 
 	<div class="admin_info">
             <p class="fw700">차트번호</p>
-            <p><?= $row[mb_id]?></p>
+            <p><?= $row['mb_id']?></p>
         </div>
         <div class="admin_info">
             <p class="fw700">환자정보</p>
-            <p><?= $row[mb_name]?>(<?=$row[mb_homepage]?>) / <span class="dm"><?= $row[mb_9]?> </span>(만 <span class="dm"><?=$age?></span>세)</p>
+            <p><?= $row['mb_name']?>(<?=$row['mb_8'] == '0' ? '남' : '여'?>) / <span class="dm"><?= $row['mb_1']?> </span>(만 <span class="dm"><?=$age?></span>세)</p>
         </div>
         <div class="admin_info">
             <p class="fw700">전화번호</p>
-			<p class="dm"><?= $row[mb_hp]?> <? if($row[mb_8]) {?>보호자: <?= $row[mb_8]?> <? } ?></p>
+			<p class="dm"><?= $row['mb_hp']?> <? if($row['mb_tel']) {?>보호자: <?= $row['mb_tel']?> <? } ?></p>
         </div>
         <div class="customer_info1">
             <p class="fw700">CASE</p>
-            <p><?= $row[mb_2]?></p>
+            <p><?= $row['mb_2']?></p>
         </div>
         <div class="customer_info2">
             <p class="fw700">치료형태</p>
-            <p><?= $row[mb_3]?></p>
+            <p>
+                <span>발치 진행 유무 : <?= $row['mb_3']?>&nbsp;&#124;&nbsp;</span>
+                <span>교정 범위 : <?= $row['mb_4']?>&nbsp;&#124;&nbsp;</span>
+                <span>교정 부위 : <?= $row['mb_5']?>&nbsp;&#124;&nbsp;</span>
+                <span>교정 악궁 : <?= $row['mb_6']?>&nbsp;</span>
+            </p>
         </div>
         <div class="customer_info3">
             <p class="fw700">사용장치</p>
-            <p><?= $row[mb_4]?></p>
+            <p><?= $row['mb_7']?></p>
         </div>
     </div>
    <?}?>
-    <!--
-    <select name="wr_1" id="wr_1">
-        <?
-        $sql3="select mb_id, mb_name from {$g5['member_table']} where mb_level=6 order by mb_id desc";
-        $res3=sql_query( $sql3);
-        while($row3 = sql_fetch_array($res3)){?>
-        <option value="<?=$row3[mb_id]?>" <? if($stx==$row3[mb_id]){?>selected<?}?> disabled><?=$row3[mb_id]?>(<?=$row3[mb_name]?>)</option>
 
-        <? }?>
-    </select> -->
-
-    <input type="hidden" name="wr_1" value="<?=$stx?>" style="width:100px; ">  
-    <input type="hidden" name="wr_2" value="<?=$row[mb_name]?>" style="width:100px; ">
+    <input type="hidden" name="wr_1" value="<?=$stx?>">  
+    <input type="hidden" name="wr_2" value="<?=$row['mb_name']?>">
   
     <?php }else{ ?>
         <select name="wr_1" id="wr_1" required>
@@ -286,8 +297,13 @@ $attrs=NULL ) {
     아래 링크에서 이미지 사이즈를 변경할 수 있습니다. ('가로세로비율유지' 체크 필수) <br><br>
     </p>
     <p><a href="https://www.iloveimg.com/ko/resize-image/resize-jpg" target="_blank" style="font-size:20px; color: blue; text-align:left; margin-top:10px; text-decoration:underline; display:inline">이미지 사이즈 변경하기 클릭!</a></p>
-  
 
+    </div>
+
+    <!-- 상단 고정 -->
+    <div>
+        <input type="checkbox" id="pin_fix" name="wr_3"  class="pin_fix" value="1" <?=(int) $write['wr_3'] == 1 ? 'checked' : ''?>>
+        <label for="pin_fix"><span></span>상단 고정</label>
     </div>
 
     <div class="bo_w_tit write_div">
@@ -327,8 +343,8 @@ $attrs=NULL ) {
     </div>
 
     <div class="write_div"> 다음 진료 예약일
-			<input type="date" name="wr_6" value="<?php echo $write[wr_6]?>" id="wr_6"  class="" size="10" style="height:30px;" placeholder="예약일">
-			<input type="time" name="wr_7" value="<?php echo $write[wr_7]?>" id="wr_7"  class="" size="10" style="height:30px;" placeholder="예약시간">
+			<input type="date" name="wr_6" value="<?php echo $write['wr_6']?>" id="wr_6"  class="" size="10" style="height:30px;" placeholder="예약일">
+			<input type="time" name="wr_7" value="<?php echo $write['wr_7']?>" id="wr_7"  class="" size="10" style="height:30px;" placeholder="예약시간">
     </div>
 
     <?php if ($is_use_captcha) { //자동등록방지  ?>

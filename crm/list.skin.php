@@ -144,16 +144,20 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
             </p>
         </div>
         <div class="ortho_info">
-            <div class="ortho_info2">
-                <span class="dm fw700"><?php echo $latest_date ?></span>
+        <div class="ortho_info1">
+                <span class="dm fw700"><?php echo $row['mb_sdate'] ?></span>
                 <p>치료 시작일</p>
+            </div>
+            <div class="ortho_info2">
+                <span class="dm fw700"><?php echo $row['mb_fdate'] ?></span>
+                <p>치료 종료 예상일</p>
             </div>
             <div class="ortho_info3">
                 <span class="dm fw700"><?php echo number_format($total_count) ?></span>
                 <p>스토리</p>
             </div>
             <div class="ortho_info4">
-                <span class="dm fw700"><?= $d_day2 ?></span>
+                <?= $d_day_count ?>
                 <p>남은 기간</p>
             </div>
         </div>

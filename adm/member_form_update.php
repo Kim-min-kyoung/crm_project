@@ -57,7 +57,13 @@ $check_keys = array(
 'mb_sms',
 'mb_open',
 'mb_profile',
-'mb_level'
+'mb_level',
+'mb_sdate',
+'mb_fdate',
+'mb_sex',
+'mb_1',
+'mb_2',
+'mb_3'
 );
 
 for($i=1;$i<=10;$i++){
@@ -102,7 +108,10 @@ $sql_common = "  mb_name = '{$posts['mb_name']}',
                  mb_7 = '{$posts['mb_7']}',
                  mb_8 = '{$posts['mb_8']}',
                  mb_9 = '{$posts['mb_9']}',
-                 mb_10 = '{$posts['mb_10']}' ";
+                 mb_10 = '{$posts['mb_10']}',
+                 mb_sex = '{$posts['mb_sex']}',
+                 mb_sdate = '{$posts['mb_sdate']}',
+                 mb_fdate = '{$posts['mb_fdate']}' ";
 
 if ($w == '')
 {

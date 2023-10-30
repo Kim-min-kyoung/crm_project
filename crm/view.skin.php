@@ -9,9 +9,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 <script src="<?php echo G5_JS_URL; ?>/viewimageresize.js"></script>
 <link rel="stylesheet" href="/theme/basic/css/style.css">
 
-
 <!-- 게시물 읽기 시작 { -->
-
 
 
 <article id="bo_v" style="max-width:900px; min-width: 320px; width:100%; margin:0 auto;">
@@ -32,18 +30,16 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
     </header>
 
 
-    <?if($is_admin || $member[mb_level] >=9 ){?>
+    <?if($is_admin || $member['mb_level'] >=9 ){?>
     <section id="bo_v_info">
      
 
     	<!-- 게시물 상단 버튼 시작 { -->
-        <?if($is_admin || $member[mb_level] >=9 ){?>
+        <?if($is_admin || $member['mb_level'] >=9 ){?>
 	    <div id="bo_v_top">
 	        <?php ob_start(); ?>
 
 	        <ul class="btn_bo_user bo_v_com">
-				<!-- <li><a href="/bbs/board.php?bo_table=ortho_story&page=&sca=&sfl=wr_1&stx=<?=$view[wr_1]?>" class="btn_b01 btn" title="목록"><i class="fa fa-list" aria-hidden="true"></i><span class="sound_only">목록</span></a></li> -->
-	            <!-- <?php if ($reply_href) { ?><li><a href="<?php echo $reply_href ?>" class="btn_b01 btn" title="답변"><i class="fa fa-reply" aria-hidden="true"></i><span class="sound_only">답변</span></a></li><?php } ?> -->
 	            <?php if ($write_href) { ?><li><a href="<?php echo $write_href ?>&stx=<?=$view[wr_1]?>" class="btn_b01 btn" title="글쓰기"><i class="fa fa-pencil" aria-hidden="true"></i><span class="sound_only">글쓰기</span></a></li><?php } ?>
 	        	<?php if($update_href || $delete_href || $copy_href || $move_href || $search_href) { ?>
 	        	<li>
@@ -64,8 +60,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 				$(".btn_more_opt.is_view_btn").on("click", function(e) {
                     e.stopPropagation();
 				    $(".more_opt.is_view_btn").toggle();
-				})
-;
+				});
                 $(document).on("click", function (e) {
                     if(!$(e.target).closest('.is_view_btn').length) {
                         $(".more_opt.is_view_btn").hide();
@@ -80,12 +75,11 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 	    </div>
 	    <!-- } 게시물 상단 버튼 끝 -->
 	    <div id="bo_v_top">
-<?php //echo $view['wr_1']; ?>
+    <?php //echo $view['wr_1']; ?>
 	</div>
         <?}?>
     </section>
     <?}?>
-
 
     <? // 검색된 회원 정보 가져오기
     $sql1="select * from {$g5['member_table']} where mb_id = '$view[wr_1]'";
@@ -93,13 +87,9 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
     $row= sql_fetch_array( $res1);
     ?>
 
-
-
-
-
     <section>
 		<div style="font-size:15px; color:#ff5f59; padding:10px; line-height:32px;">
-				▶ <?=$row[mb_name];?>님의 다음 진료 예약일은  <?=$view[wr_6];?>(<?=$view[wr_7];?>) 입니다.  <br>
+				▶ <?=$row['mb_name'];?>님의 다음 진료 예약일은  <?=$view['wr_6'];?>(<?=$view['wr_7'];?>) 입니다.  <br>
 				▶ 진료일, 시간 변경은 전화로만 가능합니다. 
 		</div>
     </section>
@@ -107,11 +97,6 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 
     <section id="bo_v_atc">
         <h2 id="bo_v_atc_title">본문</h2>
-        <!-- <div id="bo_v_share">
-        	<?php include_once(G5_SNS_PATH."/view.sns.skin.php"); ?>
-	        <?php if ($scrap_href) { ?><a href="<?php echo $scrap_href;  ?>" target="_blank" class="btn btn_b03" onclick="win_scrap(this.href); return false;"><i class="fa fa-bookmark" aria-hidden="true"></i> 스크랩</a><?php } ?>
-	    </div> -->
-
         <?php
         // 파일 출력
         $v_img_count = count($view['file']);
@@ -125,9 +110,6 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
             echo "</div>\n";
         }
          ?>
-
-
-
 
         <!-- 본문 내용 시작 { -->
         <div id="bo_v_con"><?php echo get_view_thumbnail($view['content']); ?></div>
@@ -170,10 +152,10 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 
 
     <section>
-	  <? if($member[mb_level] == "10") {?>
-		<div style="width:55%; margin: 0 auto; float:left;"><a href="/ortho_sms.php?bo_table=<?=$bo_table?>&wr_id=<?=$view[wr_id]?>&wr_1=<?=$view[wr_1]?>"><input type="button" value="문자알림 보내기" style="width:100px; height:35px; float:right; margin-right:5px; background-color:#ff3158; border: 1px solid #dd2145; color:#fff; cursor:pointer;" onclick="location.href=''; document.getElementById('popchk').style.display='none'"></a></div>
+	  <? if($member['mb_level'] == "10") {?>
+		<div style="width:55%; margin: 0 auto; float:left;"><a href="/ortho_sms.php?bo_table=<?=$bo_table?>&wr_id=<?=$view['wr_id']?>&wr_1=<?=$view['wr_1']?>"><input type="button" value="문자알림 보내기" style="width:100px; height:35px; float:right; margin-right:5px; background-color:#ff3158; border: 1px solid #dd2145; color:#fff; cursor:pointer;" onclick="location.href=''; document.getElementById('popchk').style.display='none'"></a></div>
 		<br><br><br>
-		<div style="width:100%; text-align:center;">발송일시 : <?=$view[wr_10]?> / 발송인: <?=$view[wr_9]?> / 단축 url : <?=$view[wr_8]?></div>
+		<div style="width:100%; text-align:center;">발송일시 : <?=$view['wr_10']?> / 발송인: <?=$view['wr_9']?> / 단축 url : <?=$view['wr_8']?></div>
 	 <? } ?>
     </section>
 
@@ -244,13 +226,6 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
     </section>
     <!-- } 관련링크 끝 -->
     <?php } ?>
-<!--     
-    <?php if ($prev_href || $next_href) { ?>
-    <ul class="bo_v_nb">
-        <?php if ($prev_href) { ?><li class="btn_prv"><span class="nb_tit"><i class="fa fa-chevron-up" aria-hidden="true"></i> 이전글</span><a href="<?php echo $prev_href ?>"><?php echo $prev_wr_subject;?></a> <span class="nb_date"><?php echo str_replace('-', '.', substr($prev_wr_date, '2', '8')); ?></span></li><?php } ?>
-        <?php if ($next_href) { ?><li class="btn_next"><span class="nb_tit"><i class="fa fa-chevron-down" aria-hidden="true"></i> 다음글</span><a href="<?php echo $next_href ?>"><?php echo $next_wr_subject;?></a>  <span class="nb_date"><?php echo str_replace('-', '.', substr($next_wr_date, '2', '8')); ?></span></li><?php } ?>
-    </ul>
-    <?php } ?> -->
 
     <?php
     // 코멘트 입출력
