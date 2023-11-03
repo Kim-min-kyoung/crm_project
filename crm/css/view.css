@@ -1,0 +1,60 @@
+@import url("./font.css");
+/* data-scroll */
+#bo_v {
+  max-width: 900px;
+  min-width: 320px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+#bo_v_title a img {
+  width: 2vw;
+}
+#bo_v_title .bo_v_tit {
+  font-size: 1.5em;
+  letter-spacing: 0.5px;
+  color: #6b6b6b;
+}
+
+.view_tit {
+  font-size: 16px;
+  color: #7bb7ff;
+  padding: 10px;
+  line-height: 25px;
+  text-align: left;
+}
+
+.view_kakao_btn {
+  width: 55%;
+  margin: 0 auto;
+}
+.view_kakao_btn input {
+  width: 180px;
+  height: 50px;
+  background-color: #7bb7ff;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 22px;
+  font-weight: 400;
+  border-radius: 30px;
+}
+
+.view_send_txt {
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  font-weight: 500;
+  font-size: 16px;
+  color: #3a3a3a;
+}
+
+.color_main2 b {
+  color: #c3ddfe;
+  font-size: 36px;
+  letter-spacing: -0.1em;
+}
+
+#bo_vc .cm_wrap span.member {
+  color: #7bb7ff;
+}

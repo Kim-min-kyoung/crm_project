@@ -6,6 +6,9 @@ if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
 // 글자수 제한
 var char_min = parseInt(<?php echo $comment_min ?>); // 최소
 var char_max = parseInt(<?php echo $comment_max ?>); // 최대
+
+// style
+add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/css/view.css">', 0);
 </script>
 <button type="button" class="cmt_btn"><span class="total color_main2"><b>comment</b> <?php //echo $view['wr_comment']; ?></span><span class="cmt_more"></span></button>
 <!-- 댓글 시작 { -->
@@ -18,11 +21,6 @@ var char_max = parseInt(<?php echo $comment_max ?>); // 최대
         $comment_id = $list[$i]['wr_id'];
         $cmt_depth = strlen($list[$i]['wr_comment_reply']) * 50;
         $comment = $list[$i]['content'];
-        /*
-        if (strstr($list[$i]['wr_option'], "secret")) {
-            $str = $str;
-        }
-        */
         $comment = preg_replace("/\[\<a\s.*href\=\"(http|https|ftp|mms)\:\/\/([^[:space:]]+)\.(mp3|wma|wmv|asf|asx|mpg|mpeg)\".*\<\/a\>\]/i", "<script>doc_write(obj_movie('$1://$2.$3'));</script>", $comment);
         $cmt_sv = $cmt_amt - $i + 1; // 댓글 헤더 z-index 재설정 ie8 이하 사이드뷰 겹침 문제 해결
 		$c_reply_href = $comment_common_url.'&amp;c_id='.$comment_id.'&amp;w=c#bo_vc_w';
@@ -121,8 +119,8 @@ var char_max = parseInt(<?php echo $comment_max ?>); // 최대
     <input type="hidden" name="spt" value="<?php echo $spt ?>">
     <input type="hidden" name="page" value="<?php echo $page ?>">
     <input type="hidden" name="is_good" value="">
-	<input type="hidden" name="wr_1" value="<?php echo $view['wr_1'] ?>">
-	<input type="hidden" name="wr_2" value="<?php echo $view['wr_2'] ?>">
+	<input type="hidden" name="wr_1" value="<?php echo $view[wr_1] ?>">
+	<input type="hidden" name="wr_8" value="<?php echo $view[wr_8] ?>">
 
 
     <span class="sound_only">내용</span>

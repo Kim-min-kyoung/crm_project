@@ -1,0 +1,284 @@
+@charset 'utf-8';
+@use "_common_set" as def;
+/* list.skin.php custom 시작*/
+// common
+
+.ft_blue {
+  color: def.$main_blue;
+}
+.ft_sblue {
+  color: def.$main_skyblue;
+}
+.fw900 {
+  font-weight: 900;
+}
+.fw700 {
+  font-weight: 700;
+}
+.fw500 {
+  font-weight: 500;
+}
+.fw300 {
+  font-weight: 300;
+}
+
+// searchs
+input[type="text"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+  @include def.focus(def.$main_blue);
+}
+
+.top_sch_wrap {
+  .bo_sch {
+    @include def.flex(center, center, column);
+  }
+  form {
+    width: 100%;
+  }
+  .sch_bar {
+    position: relative;
+    display: flex;
+    width: 100%;
+    margin: 20px 0 10px;
+    .sch_btn {
+      position: absolute;
+      top: 50%;
+      left: 20px;
+      width: 22px;
+      height: 22px;
+      transform: translate(0, -50%);
+      text-align: center;
+      img {
+        width: 100%;
+      }
+    }
+  }
+  .sch_input {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 20px 0 60px;
+    box-sizing: border-box;
+    outline: none;
+    -webkit-border: 1px solid transparent;
+    border: 1px solid transparent;
+    border-radius: 100px;
+    background-color: #eee;
+    font-size: def.$pc_font_sr;
+    font-weight: bold;
+    color: #232323;
+    line-height: 45px;
+    &::placeholder {
+      font-size: def.$pc_font_sr;
+      font-weight: bold;
+      color: #232323;
+      line-height: 45px;
+    }
+  }
+}
+// select
+.sch_bar_date {
+  .sch_input {
+    display: block;
+    width: 100%;
+    max-width: 180px;
+    padding: 0 20px;
+    line-height: 40px;
+    margin: 10px 10px 10px 0;
+    font-size: def.$pc_font_sr;
+    font-weight: bold;
+    color: #232323;
+    line-height: 45px;
+    &:focus {
+      &:focus {
+        @include def.focus(def.$main_blue);
+      }
+    }
+  }
+}
+.sch_select_wrap {
+  display: none;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  select.sch_input {
+    width: 20%;
+    height: 50px;
+    min-width: 180px;
+    margin: 9px 10px 4px 0px;
+    padding: 0px 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #232323;
+    line-height: 50px;
+  }
+}
+
+#show_detail_sch {
+  font-size: 0.9rem;
+  padding: 0 20px;
+  text-decoration: underline;
+  &:hover {
+    color: def.$main_blue;
+  }
+}
+
+// info
+.crm_total_info {
+  display: inline-block;
+  margin: 2rem 0;
+  text-align: center;
+  span {
+    display: inline-block;
+  }
+  .crm_total_count {
+    font-size: 5rem;
+  }
+  p {
+    display: inline-block;
+    font-size: def.$pc_font_rr;
+  }
+}
+
+// buttons
+.button_wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// list
+.back_to_list {
+  display: inline-block;
+  padding: 10px 20px 10px 35px;
+  font-size: def.$pc_font_r;
+  background: url("../img/back_to.png") no-repeat left center/19% auto;
+  transition: 0.4s;
+  font-weight: 700;
+  &:hover {
+    color: def.$main_blue;
+    background-image: url("../img/back_to_hov.png");
+  }
+}
+.gall_more {
+  position: absolute;
+  top: 10px;
+  right: 7px;
+  width: 17%;
+  max-width: 40px;
+  z-index: 3;
+  a {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  img {
+    width: 100%;
+  }
+}
+//이름
+.gall_pos {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  width: 100%;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.15);
+  font-size: def.$pc_font_sr;
+  b {
+    color: #fff;
+  }
+  span {
+    display: inline-block;
+    margin-left: 4px;
+    color: #232323;
+  }
+}
+// 코멘트
+.crm_comment {
+  width: 27px;
+  line-height: 27px;
+  position: absolute;
+  bottom: 2%;
+  right: 2.5%;
+
+  span {
+    display: block;
+    height: inherit;
+    line-height: inherit;
+    color: def.$main_blue;
+    font-size: def.$pc_font_sr;
+    background: url("../img/co_icon.png") no-repeat center bottom -1px/100% auto;
+  }
+}
+//회원 info
+
+.crm_info_wrap {
+  display: flex;
+  margin: 2rem 0;
+}
+
+.crm_pf_wrap {
+  .crm_pf {
+    position: relative;
+    width: 8vw;
+    height: 8vw;
+    max-width: 120px;
+    max-height: 120px;
+    min-width: 60px;
+    min-height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: def.$main_blue;
+    img,
+    span {
+      display: block;
+      width: 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    img {
+      z-index: 2;
+    }
+    span {
+      font-size: def.$pc_font_r;
+      z-index: 1;
+      text-align: center;
+    }
+  }
+}
+
+.crm_info {
+  @include def.flex(flex-start);
+  padding: 4% 2%;
+  width: 100%;
+  .crm_info_li {
+    text-align: center;
+    padding: 0 2%;
+    border-right:2px solid def.$light_gray;
+    &:last-child {
+      border: none;
+    }
+    span {
+      display: inline-block;
+      margin-bottom: 4px;
+      font-size:  def.$pc_font_rr;
+    }
+    p {
+      font-size: def.$pc_font_r;
+    }
+  }
+}
+
+//리스트 시작
+#bo_gall {
+  width: 80%;
+  max-width: 900px;
+  margin: 3rem auto;
+  text-align: left;
+}

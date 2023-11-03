@@ -1,27 +1,34 @@
 <?php
 if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
+
+// 관리자가 아닌 회원의 경우 로그인 아이디(차트번호)와 게시글 차트번호 체크
+if ($is_member && !$is_admin && $view['wr_1']!== $member['mb_id']) {
+    alert("잘못된 접근입니다" ,"/bbs/board.php?bo_table=".$bo_table."&page=&sca=&sfl=wr_1&stx=".$member['mb_id']);
+}
+
 include_once(G5_LIB_PATH.'/thumbnail.lib.php');
 
 // add_stylesheet('css 구문', 출력순서); 숫자가 작을 수록 먼저 출력됨
-add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0);
+add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/css/style.css">', 0);
+add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/css/view.css">', 0);
 ?>
 
 <script src="<?php echo G5_JS_URL; ?>/viewimageresize.js"></script>
 <link rel="stylesheet" href="/theme/basic/css/style.css">
 
+
 <!-- 게시물 읽기 시작 { -->
 
-
-<article id="bo_v" style="max-width:900px; min-width: 320px; width:100%; margin:0 auto;">
+<article id="bo_v">
     <header>
         <div>
-       <a href="/bbs/board.php?bo_table=ortho_story&sca=&sop=and&sfl=wr_1&stx=<?=$stx?>"><img src="/theme/basic/svg/back.svg" alt=""></a>
+       <a href="/bbs/board.php?bo_table=crm&sca=&sop=and&sfl=wr_1&stx=<?=$stx?>"><img src="/theme/basic/svg/back.svg" alt=""></a>
         </div>
         <div id="bo_v_title">
             <?php if ($category_name) { ?>
             <span class="bo_v_cate"><?php echo $view['ca_name']; // 분류 출력 끝 ?></span> 
             <?php } ?>            
-            <a href="/bbs/board.php?bo_table=ortho_story&page=&sca=&sfl=wr_1&stx=<?=$view[wr_1]?>"><img src="/theme/basic/svg/ortho_story.svg" alt=""></a>
+            <a href="/bbs/board.php?bo_table=crm&page=&sca=&sfl=wr_1&stx=<?=$view[wr_1]?>"><img src="<?=$board_skin_url?>/img/chart_icon.png" alt="환자 리스트 보러가기"></a>
             <p class="bo_v_tit color_point m">
             <?php
             echo cut_str(get_text($view['wr_subject']), 70); // 글제목 출력
@@ -88,7 +95,7 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
     ?>
 
     <section>
-		<div style="font-size:15px; color:#ff5f59; padding:10px; line-height:32px;">
+		<div class="view_tit">
 				▶ <?=$row['mb_name'];?>님의 다음 진료 예약일은  <?=$view['wr_6'];?>(<?=$view['wr_7'];?>) 입니다.  <br>
 				▶ 진료일, 시간 변경은 전화로만 가능합니다. 
 		</div>
@@ -153,9 +160,9 @@ add_stylesheet('<link rel="stylesheet" href="'.$board_skin_url.'/style.css">', 0
 
     <section>
 	  <? if($member['mb_level'] == "10") {?>
-		<div style="width:55%; margin: 0 auto; float:left;"><a href="/ortho_sms.php?bo_table=<?=$bo_table?>&wr_id=<?=$view['wr_id']?>&wr_1=<?=$view['wr_1']?>"><input type="button" value="문자알림 보내기" style="width:100px; height:35px; float:right; margin-right:5px; background-color:#ff3158; border: 1px solid #dd2145; color:#fff; cursor:pointer;" onclick="location.href=''; document.getElementById('popchk').style.display='none'"></a></div>
-		<br><br><br>
-		<div style="width:100%; text-align:center;">발송일시 : <?=$view['wr_10']?> / 발송인: <?=$view['wr_9']?> / 단축 url : <?=$view['wr_8']?></div>
+		<div class="view_kakao_btn"><a href="/ortho_sms.php?bo_table=<?=$bo_table?>&wr_id=<?=$view['wr_id']?>&wr_1=<?=$view['wr_1']?>"><input type="button" value="카카오톡 알림" click="location.href=''; document.getElementById('popchk').style.display='none'"></a></div>
+		<br>
+		<div class="view_send_txt">발송일시 : <?=$view['wr_10']?> / 발송인: <?=$view['wr_9']?> / 단축 URL : <?=$view['wr_8']?></div>
 	 <? } ?>
     </section>
 
