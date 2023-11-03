@@ -41,8 +41,11 @@ $mo_font_ss: 2.3vw;
 // mobile
 
 // color pallet
+<<<<<<< HEAD
 $main_blue: #7bb7ff;
 $main_skyblue: #c3ddfe;
+=======
+>>>>>>> 1074903477d7fcfa1d110aaf5df782c30bccd326
 $main_color: #f08468;
 $light_org : #feead1;
 $dark_org: #e5b086;
@@ -71,6 +74,7 @@ $font-family2: 'Poppins', "나눔고딕", NanumGothic, "Nanum Gothic","돋움", 
 $font-family3: 'TheJamsil', "나눔고딕", NanumGothic, "Nanum Gothic","돋움", Dotum, Arial, sans-serif;
 
 // mixin
+<<<<<<< HEAD
 @mixin focus($color) {
   -webkit-box-shadow: 0 0 5px $color;
   -moz-box-shadow: 0 0 5px $color;
@@ -79,6 +83,8 @@ $font-family3: 'TheJamsil', "나눔고딕", NanumGothic, "Nanum Gothic","돋움"
 }
 
 
+=======
+>>>>>>> 1074903477d7fcfa1d110aaf5df782c30bccd326
 @mixin flex($js_content: center, $al_item: center, $flx_direction: row, $wrap: nowrap) {
   display: flex;
   justify-content: $js_content;
